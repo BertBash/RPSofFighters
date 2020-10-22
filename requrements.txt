@@ -1,0 +1,5 @@
+best of 5 rps
+
+name field
+
+images for each option should listen for button press, when clicked the cpu will decide 
