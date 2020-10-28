@@ -1,33 +1,56 @@
+function changeLevel(){
+    if(level < 5){
+        level++;
+        lev.innerText = name + " vs " + opponents[level-1];
+        opponent.innerHTML = '<img src="./assets/visual/' + opponents[level-1] +  '.gif" alt="Idle animation of the opposing character">';
+    }else{
+        level = 1;
+        lev.innerText = name + " vs " + opponents[level-1];        
+        opponent.innerHTML = '<img src="./assets/visual/' + opponents[level-1] +  '.gif" alt="Idle animation of the opposing character">';
+    }
+}
+
 function checkgame(){
     if(gameCount[0] === 3){
         gameCount = [0,0];
-        alert("You win!");
-        alert("Now, fight a new rival!");
+        changeLevel();
     }else if(gameCount[1] == 3){
         gameCount = [0,0];
-        level = 0;
-        alert("Go home and be a family man!");
-    }    
+        level = 100;
+        changeLevel();
+    }
+    result.innerText = "Opponent chose " + cpu +"!";    
+    score.innerText = gameCount[0] + " - " + gameCount[1];
+    cpuMove();
 }
 
+function cpuMove(){
+    let c = Math.floor((Math.random() * 3));
+    let choices = ["rock", "paper", "scissors"];
+    cpu = choices[c];
+}
+
+//Result Functions
 function win(){
-    console.log("You Win!");
     gameCount[0]++;
-    score.innerText = gameCount[0] + " - " + gameCount[1];
     checkgame();
+    result.innerText = result.textContent + " you win!";
 }
 
 function lose(){
     gameCount[1]++;
-    score.innerText = gameCount[0] + " - " + gameCount[1];
-    wake();
+    checkgame();
+    result.innerText = result.textContent + " you lose!";
 }
 
 function tie(){
     score.innerText = gameCount[0] + " - " + gameCount[1];
-    wake();
+    result.innerText = "Opponent chose " + cpu +"!";    
+    cpuMove();
+    result.innerText = result.textContent + " draw game!";
 }
 
+//Button Functions
 function rock(){
     console.log("In Rock!");
 
@@ -63,44 +86,30 @@ function scissors(){
     }
 }
 
-function sleep(){
-    console.log(flag);
-    if(flag){
-        setTimeout(sleep, 1000);
-    }    
+//Name Functions
+function setName(){
+    name = document.getElementById("name").value;
+    lev.innerText = name + " vs " + opponents[level-1];
 }
 
-function wake(){
-    flag = false;
-}
-
-var cpu = "scissors";
-var flag = true;
+//Variables
+var cpu;
 var gameCount = [0,0];
 var level = 1;
-console.log("hi there");
+var opponents = ["lucky", "terry", "leona", "iori", "rugal"];
+var name = "?????";
+
+//Element variables
 var score = document.getElementById("score");
+var lev = document.getElementById("level");
+var opponent = document.getElementById("opponent");
+var result = document.getElementById("result");
+
+//Event Listeners for buttons
 document.getElementById("rock").addEventListener("click", rock);
 document.getElementById("paper").addEventListener("click", paper);
 document.getElementById("scissors").addEventListener("click", scissors);
+document.getElementById("nameSelect").addEventListener("click", setName);
 
-for(let i = 0; i<3; i++){
-    console.log("looping")
-    //Listen for a button press, then run RPS on it.
-    flag = true;
-    sleep();
-
-    //Play animation
-
-    if(gameCount[0] === 3){
-        gameCount = [0,0];
-        alert("You win!");
-        alert("Now, fight a new rival!");
-    }else if(gameCount[1] == 3){
-        gameCount = [0,0];
-        level = 0;
-        alert("Go home and be a family man!");
-    }
-    level ++;
-}
-
+//Initialize CPU Choice
+cpuMove();

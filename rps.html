@@ -8,13 +8,24 @@
 </head>
 <body>
     <section id="gameWindow">
-        <div id="score">
-        </div>
-        <div id="buttonDiv">
-            <button id="rock">Rock</button>
-            <button id="paper">Paper</button>
-            <button id="scissors">Scissors</button>
-        </div> 
+        <section id="status">
+            <div id="level">????? vs Lucky</div>
+            <div id="score">0 - 0</div>
+            <div id="result">READY GO!</div>
+        </section>
+        <section id="gameCore">
+            <figure id="playerCharacter"><img src="./assets/visual/kyo.gif" alt="Kyo Kusanagi's idle animation"></figure>
+            <div id="buttonDiv">
+                <button id="rock">Rock</button>
+                <button id="paper">Paper</button>
+                <button id="scissors">Scissors</button>
+            </div>
+        <figure id="opponent"><img src="./assets/visual/lucky.gif" alt="Idle animation of the opposing character"></figure> 
+        </section>
+        <section id="nameEntry">
+            <textarea id="name" name="Name" id="" cols="30" rows="1">Kyo</textarea>
+            <button id="nameSelect">Confirm!</button>
+        </section>
     </section>
     <script src="./rps.js"></script>
 </body>
